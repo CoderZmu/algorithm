@@ -1,4 +1,4 @@
-export function generateRandomArray(n: number, rangeL: number, rangeR: number) {
+function generateRandomArray(n: number, rangeL: number, rangeR: number) {
   let arr = []
   for (let index = 0; index < n; index++) {
       arr.push(Math.floor(Math.random() * (rangeR - rangeL + 1)) + rangeL)
@@ -6,12 +6,25 @@ export function generateRandomArray(n: number, rangeL: number, rangeR: number) {
   return arr;
 }
 
+function generateNearlyOrderedArray (n: number, swapTime: number): number[] {
+  let arr: number[] = []
+  for (let index = 0; index < n; index++) {
+    arr[index] = index
+  }
+
+  for (let index = 0; index < swapTime; index++) {
+    let posx = Math.floor(Math.random() * n)
+    let posy = Math.floor(Math.random() * n);
+    [arr[posx], arr[posy]] = [arr[posy], arr[posx]]
+  }
+  return arr
+}
 
 interface SortFunc {
   (arr: number[], n: number): void
 }
 
-export function testSort(sortName: string , sort: SortFunc, arr: number[], n: number) {
+function testSort(sortName: string , sort: SortFunc, arr: number[], n: number) {
 
   let startTime = Date.now();
   sort(arr, n);
@@ -27,8 +40,7 @@ export function testSort(sortName: string , sort: SortFunc, arr: number[], n: nu
   return;
 }
 
-
-export function __swap(arr: number[], i: number, j: number) {
+function __swap(arr: number[], i: number, j: number) {
   let tmp = arr[i]
   arr[i] = arr[j]
   arr[j] = tmp
@@ -43,3 +55,9 @@ function isSorted(arr: number[], n: number): boolean {
   return true;
 }
 
+export {
+  generateRandomArray,
+  generateNearlyOrderedArray,
+  testSort,
+  __swap
+}
