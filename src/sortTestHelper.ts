@@ -27,6 +27,13 @@ export function testSort(sortName: string , sort: SortFunc, arr: number[], n: nu
   return;
 }
 
+
+export function __swap(arr: number[], i: number, j: number) {
+  let tmp = arr[i]
+  arr[i] = arr[j]
+  arr[j] = tmp
+}
+
 function isSorted(arr: number[], n: number): boolean {
 
   for (let i = 0; i < n - 1; i++)
