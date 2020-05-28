@@ -1,4 +1,4 @@
-import { __swap } from './sortTestHelper'
+import { __swap } from '../sortTestHelper'
 
 export function quickSort(arr: number[], n: number) {
   __quickSort(arr, 0, n - 1)
