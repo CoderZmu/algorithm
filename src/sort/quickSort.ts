@@ -1,6 +1,6 @@
 import { __swap } from '../sortTestHelper'
 
-export function quickSort(arr: number[], n: number) {
+function quickSort(arr: number[], n: number) {
   __quickSort(arr, 0, n - 1)
 }
 
@@ -59,7 +59,7 @@ function __partition2(arr: number[], l: number, r: number): number {
 }
 
 
-export function quickSort3Ways(arr: number[], n: number) {
+function quickSort3Ways(arr: number[], n: number) {
   __quickSort3Ways(arr, 0, n - 1)
 }
 
@@ -99,3 +99,24 @@ function __partition3(arr: number[], l: number, r: number): {lt: number, gt: num
   return { lt, gt }
 }
 
+// 在O(n)时间复杂度里找到一个无序数组的第k小元素
+function findElement(arr: number[], k: number) {
+  let p = -1
+  let l = 0
+  let r = arr.length - 1
+  while (true) {
+    p = __partition2(arr, l, r)
+    if (p == k) break 
+    if (p < k) {
+      l = p + 1
+    } else {
+      r = p - 1
+    }
+  }
+
+  return arr[p]
+}
+
+export {
+  quickSort, quickSort3Ways,findElement
+}
