@@ -14,8 +14,20 @@ let arr4 = [...arr]
 let arr5 = [...arr]
 let arr6 = [...arr]
 // testSort('insertionSort', insertionSort, arr, n)
-testSort('mergeSort', mergeSort, arr2, n)
-testSort('quickSort', quickSort, arr3, n)
-testSort('quickSort3Ways', quickSort3Ways, arr4, n)
-testSort('heapSort', heapSort, arr5, n)
-testSort('heapSort2', heapSort2, arr6, n)
+// testSort('mergeSort', mergeSort, arr2, n)
+// testSort('quickSort', quickSort, arr3, n)
+// testSort('quickSort3Ways', quickSort3Ways, arr4, n)
+// testSort('heapSort', heapSort, arr5, n)
+// testSort('heapSort2', heapSort2, arr6, n)
+
+let maxHeap = createIndexMaxHeapInstance<number>()
+for (let index = 0; index < 15; index++) {
+  maxHeap.insert(Math.floor(Math.random() * 100))
+}
+console.log(maxHeap)
+// let sortedArr = []
+// while (!maxHeap.isEmpty()) {
+//   sortedArr.unshift(maxHeap.extratMax())
+// }
+
+// console.log(sortedArr)

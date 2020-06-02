@@ -103,6 +103,6 @@ class IndexMaxHeap<T> {
   }
 }
 
-export function createIndexMaxHeapInstance() {
-  return new IndexMaxHeap()
+export function createIndexMaxHeapInstance<T>() {
+  return new IndexMaxHeap<T>()
 }
