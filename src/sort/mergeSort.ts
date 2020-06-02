@@ -1,7 +1,7 @@
 import { insertionSortWithRange } from './baseSort'
 
 function mergeSort(arr: number[], n: number) {
-  __mergeSort(arr, 0, n)
+  __mergeSort(arr, 0, n - 1)
 }
 
 // 自底向上归并

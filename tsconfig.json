@@ -2,6 +2,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "module": "es6",
-    "target": "es5"// 转化成的目标语言
+    "target": "es6"// 转化成的目标语言
   }
 }

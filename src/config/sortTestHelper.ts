@@ -1,3 +1,5 @@
+import { SortFunc } from './interface'
+
 function generateRandomArray(n: number, rangeL: number, rangeR: number) {
   let arr = []
   for (let index = 0; index < n; index++) {
@@ -20,9 +22,6 @@ function generateNearlyOrderedArray (n: number, swapTime: number): number[] {
   return arr
 }
 
-interface SortFunc {
-  (arr: number[], n: number): void
-}
 
 function testSort(sortName: string , sort: SortFunc, arr: number[], n: number) {
 
