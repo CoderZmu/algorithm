@@ -1,7 +1,7 @@
-import { Graph, AdjIterable, AdjIterator, IterationResult } from './interface'
+import { BaseGraph, AdjIterable, AdjIterator, IterationResult } from './interface'
 
 // 稠密图 邻接矩阵
-export default class DenseGraph implements Graph {
+export default class DenseGraph implements BaseGraph {
   private n: number // 点数
   private m: number = 0 // 边数
   private directed: boolean // 有向图 

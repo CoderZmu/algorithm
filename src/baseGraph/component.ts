@@ -1,12 +1,12 @@
-import { Graph } from './interface'
+import { BaseGraph } from './interface'
 // 深度优先遍历
-export default  class Component {
-  private G: Graph
+export default class Component {
+  private G: BaseGraph
   private visited: boolean[]
   private id: number[]
   private ccount: number = 0 // 连通分量
 
-  constructor(graph: Graph) {
+  constructor(graph: BaseGraph) {
     this.G = graph
     this.visited = new Array(this.G.V()).fill(false)
     this.id = new Array(this.G.V()).fill(-1)

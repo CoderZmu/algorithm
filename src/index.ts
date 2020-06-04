@@ -6,11 +6,11 @@ import { quickSort, quickSort3Ways, findElement } from './sort/quickSort'
 import { heapSort, heapSort2 } from './sort/heapSort'
 import { BST } from './binarySearchTree/bst'
 import { UnionFind } from './unionFind/unionFind'
-import SparseGraph from './graph/sparseGraph'
-import DenseGraph from './graph/denseGraph'
-import Component from './graph/component'
-import Path from './graph/path'
-import ShortestPath from './graph/shortestPath'
+import SparseGraph from './baseGraph/sparseGraph'
+import DenseGraph from './baseGraph/denseGraph'
+import Component from './baseGraph/component'
+import Path from './baseGraph/path'
+import ShortestPath from './baseGraph/shortestPath'
 
 let n = 100000
 let arr = generateRandomArray(n, 0, n)

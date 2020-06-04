@@ -1,4 +1,4 @@
-interface Graph {
+interface BaseGraph {
 
   V(): number
   E(): number
@@ -23,4 +23,4 @@ interface IterationResult {
   done: boolean,
 }
 
-export { Graph, AdjIterable, AdjIterator, IterationResult }
+export { BaseGraph, AdjIterable, AdjIterator, IterationResult }

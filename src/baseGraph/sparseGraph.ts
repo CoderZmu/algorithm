@@ -1,7 +1,7 @@
-import { Graph, AdjIterable, AdjIterator, IterationResult } from './interface'
+import { BaseGraph, AdjIterable, AdjIterator, IterationResult } from './interface'
 
 // 稀疏图  - 邻接表
-export default class SparseGraph implements Graph {
+export default class SparseGraph implements BaseGraph {
   private n: number // 点数
   private m: number = 0 // 边数
   private directed: boolean // 有向图 

@@ -1,13 +1,13 @@
-import { Graph } from './interface'
+import { BaseGraph } from './interface'
 // 广度优先遍历
 export default class ShortestPath {
-  private G: Graph
+  private G: BaseGraph
   private s: number
   private visited: boolean[]
   private from: number[]
   private ord: number[]
 
-  constructor(graph: Graph, s: number) {
+  constructor(graph: BaseGraph, s: number) {
     if (s < 0 || s >= graph.V()) throw new Error()
 
     this.G = graph

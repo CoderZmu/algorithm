@@ -1,12 +1,12 @@
-import { Graph } from './interface'
+import { BaseGraph } from './interface'
 export default class Path {
-  private G: Graph
+  private G: BaseGraph
   private s: number
   private visited: boolean[]
   private from: number[]
 
 
-  constructor(graph: Graph, s: number) {
+  constructor(graph: BaseGraph, s: number) {
     if (s < 0 || s >= graph.V()) throw new Error()
 
     this.G = graph
