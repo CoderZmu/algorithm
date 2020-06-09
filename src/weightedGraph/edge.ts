@@ -17,4 +17,7 @@ export default class Edge<Weight> {
   valueOf () {
     return parseFloat(this.weight + '')
   }
+  toString () {
+    return this.v() + ''
+  }
 }

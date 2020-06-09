@@ -6,7 +6,7 @@ import Edge from './edge'
 // O(ELog(E))
 export default class KruskalMST<Weight> {
   private mst: Edge<Weight>[] = []
-  private mstWeight: number // 最小权值
+  private mstWeight: number = 0 // 最小权值
 
   constructor(graph: WeightedGraph<Weight>) {
     

@@ -26,7 +26,7 @@ class IndexMinHeap<T> {
   }
 
   insert(index: number, item: T) {
-    index ++
+    index++
     this.count++
     this.data[index] = item
     this.indexes[this.count] = index
@@ -40,8 +40,9 @@ class IndexMinHeap<T> {
     }
 
     let e = this.indexes[1]
-    this.indexes[1] = this.indexes[this.count]
-    this.reverse[this.count] = 1
+    __swap(this.indexes, 1, this.count)
+    this.reverse[e] = 0
+    this.reverse[this.indexes[1]] = 1
     this.count--
     this.shiftDown(1)
     return --e
@@ -68,6 +69,11 @@ class IndexMinHeap<T> {
     let j = this.reverse[i]
     this.shiftDown(j)
     this.shiftUp(j)
+  }
+
+  contain(index: number): boolean {
+
+    return Boolean(this.reverse[index + 1]);
   }
 
   private shiftUp(k: number) {

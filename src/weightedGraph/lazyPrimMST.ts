@@ -7,7 +7,7 @@ export default class LazyPrimMST<Weight> {
   private pg = new MinHeap<Edge<Weight>>() // 维护着所有的横切边
   private marked: boolean[]
   private mst: Edge<Weight>[] = []
-  private mstWeight: number // 最小权值
+  private mstWeight: number = 0 // 最小权值
 
   constructor(private G: WeightedGraph<Weight>) {
     this.marked = new Array(this.G.V()).fill(false)

@@ -8,7 +8,7 @@ export default class PrimMST<Weight> {
   private marked: boolean[]
   private edgeTo: Edge<Weight>[] = []
   private mst: Edge<Weight>[] = []
-  private mstWeight: number // 最小权值
+  private mstWeight: number = 0 // 最小权值
 
   constructor(private G: WeightedGraph<Weight>) {
     this.marked = new Array(this.G.V()).fill(false)

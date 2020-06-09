@@ -16,6 +16,7 @@ import PrimMST from './weightedGraph/primMST'
 import KruskalMST from './weightedGraph/kruskalMST'
 import DenseGraph from './weightedGraph/denseGraph'
 import SparseGraph from './weightedGraph/sparseGraph'
+import Dijkstra from './weightedGraph/dijkstra'
 
 let n = 100000
 let arr = generateRandomArray(n, 0, n)
@@ -80,25 +81,46 @@ let arr6 = [...arr]
 // path2.showPath(6)
 
 
-let N = 8
-let M = [
-  '4-5-.35',
-  '4-7-.37',
-  '5-7-.28',
-  '0-7-.16',
-  '1-5-.32',
-  '0-4-.38',
-  '2-3-.17',
-  '1-7-.19',
-  '0-2-.26',
-  '1-2-.36',
-  '1-3-.29',
-  '2-7-.34',
-  '6-2-.40',
-  '3-6-.52',
-  '6-0-.58',
-  '6-4-.93'
-]
+// let N = 8
+// let M = [
+//   '4-5-.35',
+//   '4-7-.37',
+//   '5-7-.28',
+//   '0-7-.16',
+//   '1-5-.32',
+//   '0-4-.38',
+//   '2-3-.17',
+//   '1-7-.19',
+//   '0-2-.26',
+//   '1-2-.36',
+//   '1-3-.29',
+//   '2-7-.34',
+//   '6-2-.40',
+//   '3-6-.52',
+//   '6-0-.58',
+//   '6-4-.93'
+// ]
+
+// let g1 = new DenseGraph<number>(N, false)
+// for (const e of M) {
+//   let a = parseInt(e.split('-')[0])
+//   let b = parseInt(e.split('-')[1])
+//   let w = parseFloat(e.split('-')[2])
+//   g1.addEdge(a, b, w)
+// }
+
+// let mst = new LazyPrimMST<number>(g1)
+// console.log(mst)
+
+let N = 5
+let M = ['0-1-5',
+'0-2-2',
+'0-3-6',
+'1-4-1',
+'2-1-1',
+'2-4-5',
+'2-3-3',
+'3-4-2']
 
 let g1 = new DenseGraph<number>(N, false)
 for (const e of M) {
@@ -108,5 +130,6 @@ for (const e of M) {
   g1.addEdge(a, b, w)
 }
 
-let mst = new LazyPrimMST<number>(g1)
-console.log(mst)
+let dij = new Dijkstra(g1, 0)
+console.log(dij)
+dij.showPath(4)
