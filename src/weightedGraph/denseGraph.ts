@@ -70,4 +70,5 @@ export default class DenseGraph <Weight> implements WeightedGraph<Weight> {
       }
     }
   }
+
 }

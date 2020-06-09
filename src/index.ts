@@ -5,12 +5,17 @@ import { mergeSort } from './sort/mergeSort'
 import { quickSort, quickSort3Ways, findElement } from './sort/quickSort'
 import { heapSort, heapSort2 } from './sort/heapSort'
 import { BST } from './binarySearchTree/bst'
-import { UnionFind } from './unionFind/unionFind'
-import SparseGraph from './baseGraph/sparseGraph'
-import DenseGraph from './baseGraph/denseGraph'
+import UnionFind from './unionFind/unionFind'
+// import SparseGraph from './baseGraph/sparseGraph'
+// import DenseGraph from './baseGraph/denseGraph'
 import Component from './baseGraph/component'
 import Path from './baseGraph/path'
 import ShortestPath from './baseGraph/shortestPath'
+import LazyPrimMST from './weightedGraph/lazyPrimMST'
+import PrimMST from './weightedGraph/primMST'
+import KruskalMST from './weightedGraph/kruskalMST'
+import DenseGraph from './weightedGraph/denseGraph'
+import SparseGraph from './weightedGraph/sparseGraph'
 
 let n = 100000
 let arr = generateRandomArray(n, 0, n)
@@ -48,28 +53,60 @@ let arr6 = [...arr]
 // console.log(endTime - startTime)
 
 
-let N = 7
-let M = [
-  '0,1',
-  '0,2',
-  '0,5',
-  '0,6',
-  '3,4',
-  '3,5',
-  '4,5',
-  '4,6']
+// let N = 7
+// let M = [
+//   '0,1',
+//   '0,2',
+//   '0,5',
+//   '0,6',
+//   '3,4',
+//   '3,5',
+//   '4,5',
+//   '4,6']
 
-let g1 = new SparseGraph(N, false)
-let g2 = new DenseGraph(N, false)
+// let g1 = new SparseGraph(N, false)
+// let g2 = new DenseGraph(N, false)
+// for (const e of M) {
+//   let a = parseInt(e.split(',')[0])
+//   let b = parseInt(e.split(',')[1])
+//   g1.addEdge(a, b)
+//   g2.addEdge(a, b)
+// }
+
+// let path1 = new Path(g1, 0)
+// path1.showPath(6)
+
+// let path2 = new ShortestPath(g1, 0)
+// path2.showPath(6)
+
+
+let N = 8
+let M = [
+  '4-5-.35',
+  '4-7-.37',
+  '5-7-.28',
+  '0-7-.16',
+  '1-5-.32',
+  '0-4-.38',
+  '2-3-.17',
+  '1-7-.19',
+  '0-2-.26',
+  '1-2-.36',
+  '1-3-.29',
+  '2-7-.34',
+  '6-2-.40',
+  '3-6-.52',
+  '6-0-.58',
+  '6-4-.93'
+]
+
+let g1 = new DenseGraph<number>(N, false)
 for (const e of M) {
-  let a = parseInt(e.split(',')[0])
-  let b = parseInt(e.split(',')[1])
-  g1.addEdge(a, b)
-  g2.addEdge(a, b)
+  let a = parseInt(e.split('-')[0])
+  let b = parseInt(e.split('-')[1])
+  let w = parseFloat(e.split('-')[2])
+  g1.addEdge(a, b, w)
 }
 
-let path1 = new Path(g1, 0)
-path1.showPath(6)
-
-let path2 = new ShortestPath(g1, 0)
-path2.showPath(6)
+let mst = new LazyPrimMST<number>(g1)
+console.log(mst)

@@ -1,4 +1,4 @@
-export class UnionFind {
+export default class UnionFind {
   private parent: number[] = []
   private rank: number[] = [] // rank[i]表示i为根的集合的树的层级 层级优化
   private count: number = 0

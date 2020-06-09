@@ -11,10 +11,10 @@ export default class Edge<Weight> {
     return this.weight
   }
   other (x: number) {
-    if (x !== this.a || x != this.b) throw new Error()
+    if (x !== this.a && x != this.b) throw new Error()
     return x === this.a ? this.b : this.a
   }
   valueOf () {
-    return this.weight
+    return parseFloat(this.weight + '')
   }
 }
