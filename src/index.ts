@@ -19,6 +19,8 @@ import SparseGraph from './weightedGraph/sparseGraph'
 import Dijkstra from './weightedGraph/dijkstra'
 import './test'
 
+import './test.ts'
+
 let n = 100000
 let arr = generateRandomArray(n, 0, n)
 let arr2 = [...arr]
@@ -113,6 +115,7 @@ let arr6 = [...arr]
 // let mst = new LazyPrimMST<number>(g1)
 // console.log(mst)
 
+/*
 let N = 5
 let M = ['0-1-5',
 '0-2-2',
@@ -134,3 +137,4 @@ for (const e of M) {
 let dij = new Dijkstra(g1, 0)
 console.log(dij)
 dij.showPath(4)
+*/

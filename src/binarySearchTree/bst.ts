@@ -76,6 +76,9 @@ export class BST<Key, Value> {
     this.root = this.__remove(this.root, key)
   }
 
+  floor(key: Key) {
+    return this.__floor(this.root, key)
+  }
   // 向以node为根的二叉搜索树中，插入节点（key, value）
   // 返回插入新节点后二叉搜索树的根
   __insert(node: BSTNode<Key, Value>, key: Key, value: Value): BSTNode<Key, Value> {
@@ -138,12 +141,12 @@ export class BST<Key, Value> {
   // 以node为根的二叉搜索树进行中序遍历
   __inOrder(node: BSTNode<Key, Value>, enumerateFn: EnumerateFunc<Key, Value>) {
     if (node) {
-      this.__postOrder(node.left, enumerateFn)
+      this.__inOrder(node.left, enumerateFn)
       enumerateFn(node)
-      this.__postOrder(node.right, enumerateFn)
+      this.__inOrder(node.right, enumerateFn)
     }
   }
-
+  
   // 以node为根的二叉搜索树进行后序遍历
   __postOrder(node: BSTNode<Key, Value>, enumerateFn: EnumerateFunc<Key, Value>) {
     if (node) {
@@ -218,11 +221,25 @@ export class BST<Key, Value> {
     // 新的子树的根
     let successor = this.__minimum(node.right)
     this.count++
-    this.__removeMin(node.right)
+    node.right = this.__removeMin(node.right)
     successor.left = node.left
     successor.right = node.right
     this.count--
 
     return successor
+  }
+
+
+  private __floor(node: BSTNode<Key, Value>, key: Key): BSTNode<Key, Value> {
+    if (!node) return null
+    if (node.key === key) {
+      return node
+    }
+    if (node.key > key) {
+      return this.__floor(node.left, key)
+    }
+    let tmpNode = this.__floor(node.right, key)
+    if (tmpNode) return tmpNode
+    return node
   }
 }
