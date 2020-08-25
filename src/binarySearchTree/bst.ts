@@ -40,6 +40,22 @@ export class BST<Key, Value> {
     this.__postOrder(this.root, enumerateFn)
   }
 
+  // 层序遍历
+  levelOrder() {
+    let q: BSTNode<Key, Value>[] = []
+    q.push(this.root)
+    while (q.length) {
+      let node = q.shift()
+      // 
+
+      if (node.left) {
+        q.push(node.left)
+      }
+      if (node.right) {
+        q.push(node.right)
+      }
+    }
+  }
   // 寻找最小的键值
   minimum(): Key {
     if (this.count === 0)
