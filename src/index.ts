@@ -17,6 +17,7 @@ import KruskalMST from './weightedGraph/kruskalMST'
 import DenseGraph from './weightedGraph/denseGraph'
 import SparseGraph from './weightedGraph/sparseGraph'
 import Dijkstra from './weightedGraph/dijkstra'
+import './test'
 
 import './test.ts'
 
