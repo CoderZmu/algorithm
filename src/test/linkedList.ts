@@ -472,3 +472,5 @@ function rotateRight(head: ListNode | null, k: number): ListNode | null {
 let arr1 = [1,2,3,4,5]
 let l1 = createLinkedList(arr1)
 printLinkedList(rotateRight(l1, 2))
+
+export { ListNode, createLinkedList, printLinkedList }
