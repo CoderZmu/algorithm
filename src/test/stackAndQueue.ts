@@ -1,4 +1,5 @@
-import { ListNode, createLinkedList, printLinkedList } from './linkedList'
+import { ListNode, createLinkedList } from './helper'
+
 function isValid(s: string): boolean {
   // 栈顶元素反映了在嵌套的层级关系中，最近需要匹配的元素
   let leftBraces = ['(', '{', '[']

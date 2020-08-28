@@ -1,33 +1,4 @@
-
-class ListNode {
-  val: number
-  next: ListNode | null
-  constructor(val?: number, next?: ListNode | null) {
-    this.val = (val === undefined ? 0 : val)
-    this.next = (next === undefined ? null : next)
-  }
-}
-
-function createLinkedList(nums: number[]): ListNode {
-  if (nums.length === 0) return null
-  let head = new ListNode(nums[0])
-  let cur = head
-  for (let index = 1; index < nums.length; index++) {
-    let node = new ListNode(nums[index])
-    cur.next = node
-    cur = node
-  }
-  return head
-}
-
-function printLinkedList(head: ListNode) {
-  let arr = []
-  while (head) {
-    arr.push(head.val)
-    head = head.next
-  }
-  console.log(arr)
-}
+import { ListNode, createLinkedList, printLinkedList } from './helper'
 
 function reverseList(head: ListNode | null): ListNode | null {
   /*

@@ -1,3 +1,4 @@
+import { TreeNode } from './helper'
 
 function isValid(s: string): boolean {
   // 栈顶元素反映了在嵌套的层级关系中，最近需要匹配的元素
@@ -68,17 +69,6 @@ function simplifyPath(path: string): string {
 };
 
 // 栈和递归紧密联系
-class TreeNode {
-  val: number
-  left: TreeNode | null
-  right: TreeNode | null
-  constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-    this.val = (val === undefined ? 0 : val)
-    this.left = (left === undefined ? null : left)
-    this.right = (right === undefined ? null : right)
-  }
-}
-
 class Command {
   constructor(public s: string, public node: TreeNode) { }
 }
