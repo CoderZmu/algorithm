@@ -17,11 +17,10 @@ import KruskalMST from './weightedGraph/kruskalMST'
 import DenseGraph from './weightedGraph/denseGraph'
 import SparseGraph from './weightedGraph/sparseGraph'
 import Dijkstra from './weightedGraph/dijkstra'
+
 import './test'
 
-import './test.ts'
-
-let n = 100000
+let n = 8000
 let arr = generateRandomArray(n, 0, n)
 let arr2 = [...arr]
 let arr3 = [...arr]
@@ -30,6 +29,7 @@ let arr5 = [...arr]
 let arr6 = [...arr]
 // testSort('insertionSort', insertionSort, arr, n)
 // testSort('mergeSort', mergeSort, arr2, n)
+// testSort('insertionSort', insertionSort, arr3, n)
 // testSort('quickSort', quickSort, arr3, n)
 // testSort('quickSort3Ways', quickSort3Ways, arr4, n)
 // testSort('heapSort', heapSort, arr5, n)

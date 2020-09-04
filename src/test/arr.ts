@@ -208,7 +208,7 @@ function reverseVowels(s: string): string {
   let vowelChats = new Set(['a', 'e', 'i', 'o', 'u'])
   let list = s.split('')
   let l = 0, r = list.length - 1
-  debugger
+
   while (l < r) {
     if (!vowelChats.has(s[l].toLowerCase())) {
       l++
