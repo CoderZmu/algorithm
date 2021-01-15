@@ -185,11 +185,6 @@ function threeSum(nums: number[]): number[][] {
   return result
 };
 
-// 125
-// 344
-// 345
-// 11
-
 
 // 125. 验证回文串
 function isPalindrome(s: string): boolean {

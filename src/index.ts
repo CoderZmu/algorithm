@@ -19,6 +19,8 @@ import SparseGraph from './weightedGraph/sparseGraph'
 import Dijkstra from './weightedGraph/dijkstra'
 
 import './test'
+import './test02'
+import './test03'
 
 let n = 8000
 let arr = generateRandomArray(n, 0, n)

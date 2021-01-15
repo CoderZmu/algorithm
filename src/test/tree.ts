@@ -20,7 +20,7 @@ function invertTree(root: TreeNode | null): TreeNode | null {
   return root
 };
 
-// 100 101 222 110
+// 222
 
 function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
   if (!p && !q) return true

@@ -26,7 +26,7 @@ function floor<T>(arr: T[], n: number, target: T): number {
   let l = -1, r = n - 1
   while (l < r) {
     let mid = Math.floor(l + (r - l + 1) / 2) // 向上取整
-    if (arr[mid] >= target) {
+    if (target <= arr[mid]) {
       r = mid - 1
     } else {
       l = mid
@@ -38,3 +38,4 @@ function floor<T>(arr: T[], n: number, target: T): number {
   }
   return l
 }
+// 3,4

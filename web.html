@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>支付宝回调</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <style>
+        .preivew {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="params"></p>
+    <button id="MyButton">点我</button>
+    <input type="file" accept="image/*" multiple />
+    <img id="img1" class="preivew" />
+</body>
+<script>
+    function onFileChange(event) {
+        const files = Array.prototype.slice.call(event.target.files)
+        const file = files[0]
+
+        document.querySelector('img').src = window.URL.createObjectURL(file)
+    }
+    document.querySelector('input').addEventListener('change', onFileChange)
+</script>
+
+</html>

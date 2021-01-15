@@ -327,7 +327,6 @@ function reorderList(head: ListNode | null): void {
 
   let cur = head
 
-  debugger
   while (cur && reverseL) {
 
     let nextNode1 = cur.next
