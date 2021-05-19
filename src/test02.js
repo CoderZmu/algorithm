@@ -1,4 +1,4 @@
-/*
+
 function levelOrder(root) {
   let result = []
   if (!root) return result
@@ -141,7 +141,7 @@ cache.get(1) // 返回 -1 (未找到)
 cache.get(3) // 返回  3
 cache.get(4) // 返回  4
 
-*/
+
 
 let promise1 = null,
   promise2 = null,

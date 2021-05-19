@@ -1,4 +1,6 @@
-import { ListNode, createLinkedList, TreeNode } from './test/helper'
+import { ListNode, createLinkedList, TreeNode, TreeSet } from './test/helper'
+import './bfsTest'
+
 function longestPalindrome(s: string): string {
   let arr = [...s]
   let left = 0, right = 0, max = 1
@@ -773,104 +775,6 @@ function kthSmallest(root: TreeNode | null, k: number): number {
 };
 
 
-/*
-给定一个二维的矩阵，包含 'X' 和 'O'（字母 O）。
-找到所有被 'X' 围绕的区域，并将这些区域里所有的 'O' 用 'X' 填充
-*/
-function solve(board: string[][]): void {
-
-  let d = [[0, -1], [1, 0], [0, 1], [-1, 0]]
-  let m = board.length, n = board[0].length
-  function inArea(x: number, y: number): boolean {
-    return x >= 0 && y >= 0 && x < m && y < n
-  }
-  function inEdge(x: number, y: number) {
-    return x == 0 || x == m - 1 || y == 0 || y == n - 1
-  }
-
-
-  function enumBoard(callback: ((x: number, y: number) => void)) {
-    for (let x = 0; x < m; x++) {
-      for (let y = 0; y < n; y++) {
-        callback(x, y)
-      }
-    }
-  }
-
-  function dfs(x: number, y: number) {
-    board[x][y] = '#'
-    for (const [a, b] of d) {
-      let nextX = a + x
-      let nextY = b + y
-      if (inArea(nextX, nextY) && board[nextX][nextY] == 'O') {
-        dfs(nextX, nextY)
-      }
-    }
-  }
-
-  enumBoard((x, y) => {
-    if (inEdge(x, y) && board[x][y] == 'O') {
-      dfs(x, y)
-    }
-  })
-
-  enumBoard((x, y) => {
-    if (board[x][y] == 'O') {
-      board[x][y] = 'X'
-    }
-  })
-
-
-  enumBoard((x, y) => {
-    if (board[x][y] == '#') {
-      board[x][y] = 'O'
-    }
-  })
-
-};
-
-let b = [["X", "X", "X", "X"], ["X", "O", "O", "X"], ["X", "X", "O", "X"], ["X", "O", "X", "X"]]
-solve(b)
-
-
-
-function isPalindrome(head: ListNode | null): boolean {
-
-  function getMidNode(head: ListNode | null): ListNode | null {
-    if (!head || !head.next) return head
-
-    let fast = head.next, slow = head.next
-    while (fast.next && fast.next.next) {
-      fast = fast.next.next
-      slow = slow.next
-    }
-
-    return slow
-  }
-
-  function reverseList(node: ListNode | null): ListNode | null {
-    if (!node || !node.next) return node
-
-    let newHead = reverseList(node.next)
-    node.next.next = node
-    node.next = null
-    return newHead
-  }
-
-  if (!head || !head.next) return true
-
-  let foo = reverseList(getMidNode(head))
-
-  while (foo) {
-    if (foo.val != head.val) return false
-    foo = foo.next
-    head = head.next
-  }
-  return true
-
-};
-
-isPalindrome(createLinkedList([1, 2]))
 
 // [4,5,2,6,3,1]
 function nextPermutation(nums: number[]): void {
@@ -914,12 +818,12 @@ function trap(height: number[]): number {
   // l_max[i] 表示位置 i 左边最高的柱子高度，r_max[i] 表示位置 i 右边最高的柱子高度
   let n = height.length, l_max: number[] = [], r_max: number[] = []
   l_max[0] = height[0]
-  r_max[n-1] = height[n-1]
+  r_max[n - 1] = height[n - 1]
   for (let i = 1; i < height.length - 1; i++) {
-    l_max[i] = Math.max(height[i], l_max[i-1])
+    l_max[i] = Math.max(height[i], l_max[i - 1])
   }
   for (let i = height.length - 2; i > 0; i--) {
-    r_max[i] = Math.max(height[i], r_max[i+1])
+    r_max[i] = Math.max(height[i], r_max[i + 1])
   }
 
   let ans = 0
@@ -935,10 +839,10 @@ function trap_02(height: number[]): number {
   if (height.length == 0) return 0
 
   // l_max 是 height[0..left] 中最高柱子的高度，r_max 是 height[right..end] 的最高柱子的高度
-  let n = height.length, 
-  left = 1, right = n - 2,
-  l_max = height[0], r_max = height[n-1]
-  
+  let n = height.length,
+    left = 1, right = n - 2,
+    l_max = height[0], r_max = height[n - 1]
+
   let ans = 0
   while (left <= right) {
     l_max = Math.max(height[left], l_max)
@@ -962,7 +866,7 @@ function largeGroupPositions(s: string): number[][] {
 
   let arr = [...s], num = 1, n = arr.length
   for (let i = 0; i < n; i++) {
-    if (i == n - 1 || arr[i] != arr[i+1]) {
+    if (i == n - 1 || arr[i] != arr[i + 1]) {
       if (num >= 3) {
         result.push([i - num + 1, i])
       }
@@ -973,180 +877,6 @@ function largeGroupPositions(s: string): number[][] {
   }
 
   return result
-};
-
-
-// 打开转盘锁
-function openLock(deadends: string[], target: string): number {
-
-  function findAdj (s: string): string[] {
-    let res: string[] = [], nums1 = [...s].map(e => parseInt(e))
-    let nums2 = nums1.concat()
-    
-    for (let i = 0; i < nums1.length; i++) {
-      let c = nums1[i]
-      let add = c == 9 ? 0 : c + 1
-      let sub = c == 0 ? 9 : c - 1
-      
-      nums2[i] = add
-      res.push(nums2.join(''))
-
-      nums2[i] = sub
-      res.push(nums2.join(''))
-
-      nums2[i] = c
-    }
-    return res
-  }
-  
-  let deads = new Set<String>()
-  deadends.forEach(e => deads.add(e))
-
-  let from = '0000'
-  if (deads.has(from)) {
-    return -1
-  }
-  if (from === target) {
-    return 0
-  }
-
-  let step = 0, stack: string[] = [], visited = new Set<string>()
-  stack.push(from)
-  visited.add(from)
-
-  while (stack.length) {
-    let sz = stack.length
-
-    while (sz--) {
-      let cur = stack.shift()
-      let adj = findAdj(cur).filter(e => !deads.has(e) && !visited.has(e))
-      
-      for (const e of adj) {
-        if (e == target) {
-          return step + 1
-        }
-        stack.push(e)
-        visited.add(e)
-      }
-    }
-    step++
-  }
-  return -1
-};
-
-// openLock(["0201","0101","0102","1212","2002"], "0202")
-
-// 双向BFS
-function openLock_02(deadends: string[], target: string): number {
-  function findAdj (s: string): string[] {
-    let res: string[] = [], nums1 = [...s].map(e => parseInt(e))
-    let nums2 = nums1.concat()
-    
-    for (let i = 0; i < nums1.length; i++) {
-      let c = nums1[i]
-      let add = c == 9 ? 0 : c + 1
-      let sub = c == 0 ? 9 : c - 1
-      
-      nums2[i] = add
-      res.push(nums2.join(''))
-
-      nums2[i] = sub
-      res.push(nums2.join(''))
-
-      nums2[i] = c
-    }
-    return res
-  }
-  
-  let deads = new Set<string>()
-  deadends.forEach(e => deads.add(e))
-
-  let q1 = new Set<string>()
-  let q2 = new Set<string>()
-  let visited = new Set<string>(), step = 0
-  q1.add('0000')
-  q2.add(target)
-
-  while (q1.size && q2.size) {
-    let tmp = new Set<string>()
-
-    for (const cur of q1) {
-      if (deads.has(cur)) {
-        continue
-      }
-      if (q2.has(cur)) {
-        return step
-      }
-      visited.add(cur)
-
-
-      let adj = findAdj(cur).filter(e => !visited.has(e))
-      for (const next of adj) {
-        tmp.add(next)
-      }
-    }
-
-    step++
-    q1 = q2
-    q2 = tmp
-
-
-  }
-  return -1
-}
-
-// 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 5 -> 6
-// 13555  6565
-// 12345  2345
-function hasCycle(head: ListNode | null): boolean {
-    let fast = head, slow = head
-    while (fast && fast.next) {
-      fast = fast.next.next
-      slow = slow.next
-      if (fast == slow) {
-        return true
-      }
-    }
-    return false
-};
-
-function middleNode(head: ListNode | null): ListNode | null {
-  if (!head) {
-    return head
-  }
-
-  let slow = head, fast = head
-  while (fast.next) {
-    fast = fast.next.next
-    slow = slow.next
-  }
-  return slow
-};
-
-
-function detectCycle(head: ListNode | null): ListNode | null {
-    let slow = head, fast = head
-    while (fast && fast.next) {
-      slow = slow.next
-      fast = fast.next.next
-
-      if (slow == fast) {
-        break
-      }
-    }
-
-    if (!fast || !fast.next) {
-      return null
-    }
-
-    slow = head
-    while (slow != fast) {
-      slow = slow.next
-      fast = fast.next
-    }
-
-
-    return slow
 };
 
 
@@ -1210,7 +940,7 @@ class Solution {
 
       this.map.set(e, last--)
     }
-    
+
   }
 
   pick(): number {
@@ -1225,3 +955,245 @@ class Solution {
 
 let s = new Solution(3, [0])
 s.pick()
+
+
+class ExamRoom {
+  private startMap = new Map<number, number[]>()
+  private endMap = new Map<number, number[]>()
+  private pq = new TreeSet<number[]>((a, b) => {
+    let distA = this.distance(a)
+    let distB = this.distance(b)
+    if (distA == distB) {
+      return b[0] - a[0]
+    }
+    return distA - distB
+  })
+  constructor(private N: number) {
+    this.addInterval([-1, N])
+  }
+
+  seat(): number {
+    let [x, y] = this.pq.max()
+    let seat: number
+    if (x == -1) {
+      seat = 0
+    } else if (y == this.N) {
+      seat = this.N - 1
+    } else {
+      seat = Math.floor((y - x) / 2) + x
+    }
+    this.removeInterval([x, y])
+    this.addInterval([x, seat])
+    this.addInterval([seat, y])
+
+    return seat
+  }
+
+  leave(p: number): void {
+    let left = this.endMap.get(p)[0]
+    let right = this.startMap.get(p)[1]
+    this.removeInterval([left, p])
+    this.removeInterval([p, right])
+    this.addInterval([left, right])
+  }
+
+
+  private removeInterval(intv: number[]) {
+    this.pq.remove(intv)
+    this.startMap.delete(intv[0])
+    this.endMap.delete(intv[1])
+  }
+
+  private addInterval(intv: number[]) {
+    this.pq.insert(intv)
+    this.startMap.set(intv[0], intv)
+    this.endMap.set(intv[1], intv)
+  }
+
+  private distance(intv: number[]): number {
+    let [x, y] = intv
+    if (x == -1) {
+      return y
+    } else if (y == this.N) {
+      return this.N - 1 - x
+    }
+    return Math.floor((y - x) / 2)
+  }
+}
+
+
+
+function xorQueries(arr: number[], queries: number[][]) {
+  let v = 0
+  let xors = [v]
+  for (const i of arr) {
+    v ^= i
+    xors.push(v)
+  }
+
+  return queries.map(([l, r]) => {
+    return xors[l] ^ xors[r + 1]
+  })
+};
+
+
+function intToRoman(num: number): string {
+  let map = new Map<number, string>([
+    [1000, 'M'],
+    [900, 'CM'],
+    [500, 'D'],
+    [400, 'CD'],
+    [100, 'C'],
+    [90, 'XC'],
+    [50, 'L'],
+    [40, 'XL'],
+    [10, 'X'],
+    [9, 'IX'],
+    [5, 'V'],
+    [4, 'IV'],
+    [1, 'I']
+  ])
+
+  let result: string[] = []
+  map.forEach((c, n) => {
+    if (num >= n) {
+
+      result = [...result, ...new Array(Math.floor(num / n)).fill(c)]
+      num = num % n
+    }
+  })
+  return result.join('')
+};
+
+
+
+
+/*
+给你一个整数数组 arr 。
+
+现需要从数组中取三个下标 i、j 和 k ，其中 (0 <= i < j <= k < arr.length) 。
+
+a 和 b 定义如下：
+
+a = arr[i] ^ arr[i + 1] ^ ... ^ arr[j - 1]
+b = arr[j] ^ arr[j + 1] ^ ... ^ arr[k]
+注意：^ 表示 按位异或 操作。
+
+请返回能够令 a == b 成立的三元组 (i, j , k) 的数目。
+
+a = xor[i] ^ xor[j]
+b = xor[j] ^ xor[k+1]
+?? xor[i] == xor[k+1] 
+*/
+function countTriplets(arr: number[]): number {
+  let v = 0, xor: number[] = [v]
+  for (const e of arr) {
+    v = v ^ e
+    xor.push(v)
+  }
+
+  let result = 0
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let k = i + 1; k < arr.length; k++) {
+      if (xor[i] == xor[k + 1]) {
+        result += k - i
+      }
+
+    }
+
+  }
+
+  return result
+};
+
+
+function leastBricks(wall: number[][]): number {
+  let map = new Map<number, number>()
+  for (let i = 0; i < wall.length; i++) {
+    let row = wall[i], acc = 0
+    for (let j = 0; j < row.length - 1; j++) {
+      acc += row[j]
+      map.set(acc, (map.get(acc) || 0) + 1)
+    }
+  }
+
+  if (!map.size) {
+    return wall.length
+  }
+  return wall.length - Math.max(...map.values())
+};
+
+// [1,2,2,3,3,3,4]
+function deleteAndEarn(nums: number[]): number {
+  let map = new Map<number, number>()
+  for (let i = 0; i < nums.length; i++) {
+    map.set(nums[i], (map.get(nums[i]) || 0) + nums[i])
+  }
+  let indexes = [...map.keys()].sort((e1, e2) => e1 - e2)
+  let c = indexes.length
+  let dp_i_1 = 0, dp_i_2 = 0
+
+  for (let i = c-1; i >= 0; i--) {
+    var tmp: number
+    if (i < c - 1 && indexes[i+1] - indexes[i] > 1) {
+      dp_i_2 = dp_i_1
+    } 
+    tmp = Math.max(dp_i_1, dp_i_2 + map.get(indexes[i]))
+    dp_i_2 = dp_i_1
+    dp_i_1 = tmp
+  }
+  return dp_i_1
+};
+
+
+// encoded = [1,2,3], first = 1    -> [1,0,2,1]
+function decode(encoded: number[], first: number): number[] {
+  let result: number[] = [first], c = first
+  for (const e of encoded) {
+    c = c ^ e
+    result.push(c)
+  }
+  return result
+};
+
+function xorOperation(n: number, start: number): number {
+  let result = 0
+  for (let i = 0; i < n; i++) {
+    result ^= (start + 2 * i)
+  }
+  return result
+ };
+
+ /*
+ 输入：jobs = [1,2,4,7,8], k = 2
+输出：11
+解释：按下述方式分配工作：
+1 号工人：1、2、8（工作时间 = 1 + 2 + 8 = 11）
+2 号工人：4、7（工作时间 = 4 + 7 = 11）
+最大工作时间是 11 。
+ */
+function minimumTimeRequired(jobs: number[], k: number): number {
+  if (!jobs.length) return 0
+  let average = jobs.reduce((pre, cur) => pre + cur) / k
+  let result = Number.MAX_VALUE, times: number[] = new Array(k).fill(0)
+  distribute(0)
+
+  function distribute(index: number) {
+    if (index >= jobs.length) {
+      result = Math.min(result, Math.max(...times))
+      return
+    }
+
+    let t = jobs[index]
+    for (let i = 0; i < k; i++) {
+      times[i] += t
+      distribute(index+1)
+      times[i] -= t
+      if (times[i] == 0) {
+        break
+      }
+    }
+  }
+
+  return result
+};
